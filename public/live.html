@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Live Message Reveal Screen</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#ef3966",
+            "background-light": "#f8f6f6",
+            "background-dark": "#221015",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+
+    /* Subtle floating background elements */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+  
+    /* Markdown rendering */
+    #live-md :where(p) { font-weight: 700; }
+    #live-md :where(em) { font-style: italic; }
+    #live-md :where(strong) { font-weight: 800; }
+    #live-md :where(h1,h2,h3) { font-weight: 800; line-height: 1.1; }
+    #live-md :where(h2) { font-size: 0.85em; opacity: 0.9; }
+    #live-md :where(ul) { margin-top: 0.75rem; padding-left: 1.25rem; list-style: disc; font-size: 0.55em; font-weight: 600; opacity: 0.9; }
+    #live-md :where(li) { margin: 0.25rem 0; }
+    #live-md :where(a) { color: #ef3966; text-decoration: underline; }
+    #live-md {white-space: pre-wrap; overflow-wrap: anywhere; word-break: keep-all;}
+
+    #live-text {min-height: 0; overflow: auto;}
+
+  </style>
+
+  <!-- Markdown + Sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-100 h-screen w-full overflow-hidden selection:bg-primary selection:text-white">
+  <!-- Ambient Background Effects -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Primary glow top right -->
+    <div
+      class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] transform translate-x-1/3 -translate-y-1/3">
+    </div>
+    <!-- Secondary glow bottom left -->
+    <div
+      class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] transform -translate-x-1/4 translate-y-1/4">
+    </div>
+  </div>
+  <!-- Main Container -->
+  <main class="relative z-10 flex flex-col md:flex-row h-full">
+    <!-- Left Panel: Context & Introduction -->
+    <section
+      class="w-full md:w-1/3 lg:w-1/4 p-8 md:p-12 lg:p-16 flex flex-col justify-center border-b md:border-b-0 md:border-r border-primary/10 bg-background-light/50 dark:bg-background-dark/50 backdrop-blur-sm">
+      <div class="mb-12">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-6">
+          <span class="material-icons text-2xl">favorite</span>
+        </div>
+        <h2 class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4 opacity-80">A Note for You</h2>
+      </div>
+      <div class="space-y-6 relative">
+        <!-- Decorative line -->
+        <div class="absolute -left-6 top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary/0 via-primary/30 to-primary/0">
+        </div>
+        <p class="text-lg md:text-xl font-light leading-relaxed text-gray-600 dark:text-gray-300">
+          You know, I'm not a very good writer, but I'm even worse at speaking.
+        </p>
+        <p class="text-base md:text-lg font-light leading-relaxed text-gray-500 dark:text-gray-400">
+          Since text messages are currently the main way I can convey to you how happy I am that you are in my life—I
+          will try to do it live.
+        </p>
+      </div>
+    </section>
+    <!-- Right Panel: Live Typing Stage -->
+    <section class="flex-1 relative flex flex-col justify-center items-center p-8 md:p-16 lg:p-24">
+      <!-- Abstract background element for depth -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] border border-primary/5 rounded-xl rotate-3 pointer-events-none">
+      </div>
+      <div class="w-full max-w-4xl relative z-10">
+        <!-- Status indicator -->
+        <div class="flex items-center gap-2 mb-8 opacity-60">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+          </span>
+          <span class="text-xs font-medium tracking-widest uppercase text-primary">Typing...</span>
+        </div>
+        <!-- Live Text Display -->
+        <div id="live-text" aria-live="polite" class="min-h-[200px]">
+          <div id="live-md" class="text-2xl md:text-2xl lg:text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white"></div>
+        </div>
+      </div>
+      <!-- Subtle footer watermark -->
+      <div
+        class="absolute bottom-8 right-8 text-gray-400 dark:text-gray-600 text-xs font-medium tracking-widest opacity-30">
+        SENT WITH LOVE • 2024
+      </div>
+    </section>
+  </main>
+<script type="module" src="/assets/live.js"></script>
+</body>
+
+</html>
