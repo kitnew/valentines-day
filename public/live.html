@@ -57,7 +57,7 @@
     }
   
     /* Markdown rendering */
-    #live-md :where(p) { font-weight: 700; }
+    #live-md :where(p) { font-weight: 400; }
     #live-md :where(em) { font-style: italic; }
     #live-md :where(strong) { font-weight: 800; }
     #live-md :where(h1,h2,h3) { font-weight: 800; line-height: 1.1; }
@@ -66,7 +66,7 @@
     #live-md :where(li) { margin: 0.25rem 0; }
     #live-md :where(a) { color: #ef3966; text-decoration: underline; }
     #live-md {white-space: pre-wrap; overflow-wrap: anywhere; word-break: keep-all;}
-
+    
     #live-text {min-height: 0; overflow: auto;}
 
   </style>
@@ -98,18 +98,20 @@
         <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-6">
           <span class="material-icons text-2xl">favorite</span>
         </div>
-        <h2 class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4 opacity-80">A Note for You</h2>
+        <h2 class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4 opacity-80">Коротенька запісочка</h2>
       </div>
       <div class="space-y-6 relative">
         <!-- Decorative line -->
         <div class="absolute -left-6 top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary/0 via-primary/30 to-primary/0">
         </div>
         <p class="text-lg md:text-xl font-light leading-relaxed text-gray-600 dark:text-gray-300">
-          You know, I'm not a very good writer, but I'm even worse at speaking.
+          Можливо, я не завжди знаходжу правильні слова. <br>Можливо, інколи мовчу тоді, коли варто було б говорити.
+          <br>Але є одна річ, у якій я абсолютно впевнений -
+          я безмежно вдячний долі за те, що ти є в моєму житті.
         </p>
         <p class="text-base md:text-lg font-light leading-relaxed text-gray-500 dark:text-gray-400">
-          Since text messages are currently the main way I can convey to you how happy I am that you are in my life—I
-          will try to do it live.
+          Ти робиш мій світ світлішим.
+          <br>І я хочу робити те саме для тебе.
         </p>
       </div>
     </section>
@@ -126,17 +128,12 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
           </span>
-          <span class="text-xs font-medium tracking-widest uppercase text-primary">Typing...</span>
+          <span class="text-xs font-medium tracking-widest uppercase text-primary">Щось друкується...</span>
         </div>
         <!-- Live Text Display -->
-        <div id="live-text" aria-live="polite" class="min-h-[200px]">
-          <div id="live-md" class="text-2xl md:text-2xl lg:text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white"></div>
+        <div id="live-text" aria-live="polite" class="min-h-[400px]">
+          <div id="live-md" class="text-2xl md:text-2xl lg:text-2xl leading-relaxed tracking-tight text-gray-900 dark:text-white"></div>
         </div>
-      </div>
-      <!-- Subtle footer watermark -->
-      <div
-        class="absolute bottom-8 right-8 text-gray-400 dark:text-gray-600 text-xs font-medium tracking-widest opacity-30">
-        SENT WITH LOVE • 2024
       </div>
     </section>
   </main>
