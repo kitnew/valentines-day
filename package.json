@@ -9,5 +9,9 @@
   "dependencies": {
     "express": "^4.19.2",
     "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
   }
 }
